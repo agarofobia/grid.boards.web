@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-yellow: #FFD633;
+  --brand-dark: #0A0A0A;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+/* small utility for section spacing */
+.section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
