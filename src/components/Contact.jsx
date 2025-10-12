@@ -1,4 +1,4 @@
-// src/components/Contact.jsx - ¡Versión Final con Estilo Minimalista/Contraste!
+// src/components/Contact.jsx - ¡Versión Final con Borde Sutil!
 
 import React from 'react';
 
@@ -7,23 +7,23 @@ export default function Contact() {
         // Sección con padding vertical estándar
         <section id="contact" className="py-20 px-6 md:px-20">
             
-            {/* MARCO PRINCIPAL: Borde blanco más grueso, sombra, fondo semitransparente, y centrado */}
-            <div className="max-w-3xl mx-auto p-8 border-2 border-white rounded-xl shadow-2xl bg-black/60">
+            {/* MARCO PRINCIPAL: Cambio CLAVE: border-2 border-white a border border-gray-800 */}
+            <div className="max-w-3xl mx-auto p-8 border border-gray-800 rounded-xl shadow-2xl bg-black/60">
 
                 <h2 className="text-2xl font-bold mb-4 text-center">Let’s craft your next board together.</h2>
                 <p className="text-center text-gray-400 mb-6">Reach out and let’s talk.</p>
 
                 <form className="grid grid-cols-1 gap-4">
-                    {/* Campos de Input: Fondo oscuro semitransparente y borde sutil */}
+                    {/* Campos de Input: Se mantienen los estilos de transparencia */}
                     <input 
-                        className="p-3 rounded bg-gray-800/80 border border-gray-700 text-white placeholder-gray-400 focus:ring-brand-yellow focus:border-brand-yellow" 
+                        className="p-3 rounded bg-black/40 border border-gray-700 text-white placeholder-gray-400 focus:ring-brand-yellow focus:border-brand-yellow" 
                         placeholder="Name" 
                         name="name" 
                         required
                     />
                     
                     <input 
-                        className="p-3 rounded bg-gray-800/80 border border-gray-700 text-white placeholder-gray-400 focus:ring-brand-yellow focus:border-brand-yellow" 
+                        className="p-3 rounded bg-black/40 border border-gray-700 text-white placeholder-gray-400 focus:ring-brand-yellow focus:border-brand-yellow" 
                         placeholder="Email" 
                         name="email" 
                         type="email"
@@ -31,7 +31,7 @@ export default function Contact() {
                     />
                     
                     <textarea 
-                        className="p-3 rounded bg-gray-800/80 border border-gray-700 text-white placeholder-gray-400 focus:ring-brand-yellow focus:border-brand-yellow" 
+                        className="p-3 rounded bg-black/40 border border-gray-700 text-white placeholder-gray-400 focus:ring-brand-yellow focus:border-brand-yellow" 
                         rows="4" 
                         placeholder="Tell us about the project"
                         name="message"
