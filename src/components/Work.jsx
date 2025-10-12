@@ -1,6 +1,6 @@
-// src/components/Work.jsx - ¡Versión Final Corregida y Funcional!
+// src/components/Work.jsx - ¡Versión Final con Bug de Scroll Corregido!
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Aseguramos que useEffect esté importado
 
 // === DATA DE LOS PROYECTOS ===
 const projectsData = [
@@ -12,8 +12,9 @@ const projectsData = [
     { type: "Pilot", brand: "Series C", media: { type: 'video', url: '/assets/work/pilot_series_c.mp4' } },
 ];
 
-// Componente para el VISOR DE MEDIOS dentro del Modal
+// Componente para el VISOR DE MEDIOS dentro del Modal (se mantiene igual)
 const ModalViewer = ({ media }) => {
+    // ... (Código de ModalViewer se mantiene igual)
     if (media.type === 'video') {
         return (
             <video 
@@ -35,7 +36,7 @@ const ModalViewer = ({ media }) => {
     );
 };
 
-// Componente para la Tarjeta de Proyecto
+// Componente para la Tarjeta de Proyecto (se mantiene igual)
 const WorkCard = ({ type, brand, onClick }) => (
     <button 
         onClick={onClick}
@@ -55,13 +56,14 @@ const WorkCard = ({ type, brand, onClick }) => (
 const ProjectModal = ({ project, onClose }) => {
     if (!project) return null;
     
-    // Lógica para bloquear/restaurar el scroll
-    React.useEffect(() => {
+    // CORRECCIÓN CLAVE: Usar useEffect para aplicar y quitar el overflow
+    useEffect(() => {
         document.body.style.overflow = 'hidden';
         return () => {
-            document.body.style.overflow = 'auto';
+            // Se asegura de que se ejecute la restauración al desmontar (cerrar)
+            document.body.style.overflow = 'auto'; 
         };
-    }, []);
+    }, [project]); // Se ejecuta cuando el 'project' cambia (abre o cierra)
 
     return (
         <div 
@@ -95,10 +97,17 @@ export default function Work() {
     // Estado para controlar qué proyecto está activo en el modal
     const [activeProject, setActiveProject] = useState(null);
 
+    // Ajuste para el estado inicial de scroll (soluciona el bug de desarrollo)
+    useEffect(() => {
+        // Asegura que el scroll esté activo al cargar la página por primera vez
+        if (!activeProject) {
+            document.body.style.overflow = 'auto';
+        }
+    }, [activeProject]);
+
     return (
         <section id="work" className="py-16 px-6 md:px-20 text-gray-100">
             
-            {/* CONTENEDOR PRINCIPAL */}
             <div className="max-w-7xl mx-auto"> 
                 
                 {/* Encabezado */}
