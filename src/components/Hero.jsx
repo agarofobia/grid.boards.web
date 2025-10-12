@@ -1,12 +1,15 @@
+// src/components/Hero.jsx - Con ajuste pt-20
+
 import React from 'react'
 
 export default function Hero() {
   return (
-    <header className="relative min-h-screen flex items-center justify-center text-center bg-black overflow-hidden">
+    // CAMBIO CLAVE: Añadimos pt-20 aquí para evitar que el Navbar lo tape.
+    <header className="relative min-h-screen pt-20 flex items-center justify-center text-center bg-black overflow-hidden">
       
       {/* RUTA DE TU SISTEMA OPERATIVO (Solo para referencia):
-          "C:\Users\HP\Desktop\artu\gridboards-vite\public\assets\hero-video.mp4" 
-      */}
+          "C:\Users\HP\Desktop\artu\gridboards-vite\public\assets\hero-video.mp4" 
+      */}
       
       {/* 1. Video de Fondo (Usando la RUTA WEB que funciona con Vite) */}
       <video
