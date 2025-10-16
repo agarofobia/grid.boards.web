@@ -1,9 +1,9 @@
-// src/components/Services.jsx - ¡Versión FINAL con Estilo Navbar Aplicado!
+// src/components/Services.jsx - ¡Versión FINAL con todas las rutas correctas!
 
 // === IMPORTACIONES ESENCIALES DE REACT ===
 import React, { useState, useRef, useEffect } from 'react';
 
-// === DATOS DE LOS SERVICIOS (CON RUTAS CORREGIDAS) ===
+// === DATOS DE LOS SERVICIOS (CON TODAS LAS RUTAS CORREGIDAS) ===
 const servicesData = [
     {
         id: 'storyboard',
@@ -11,9 +11,8 @@ const servicesData = [
         intro: "A storyboard lays out the key shots of a script.",
         type: 'images',
         content: [
-            '/assets/storyboard/frame_01.jpg',
-            '/assets/storyboard/frame_02.jpg',
-            '/assets/storyboard/frame_03.jpg',
+            '/assets/AirPods Spec Storyboard.jpeg', // <--- RUTA CORREGIDA
+            // Puedes agregar más imágenes aquí si quieres, por ahora es una
         ],
         description: "It defines characters, locations, style and brand aesthetics, giving agencies and clients a clear sequence and visual language to align on before production.",
     },
@@ -78,6 +77,10 @@ export default function Services() {
 
         switch (activeService.type) {
             case 'images':
+                // Manejo especial si no hay imágenes
+                if (!activeService.content || activeService.content.length === 0) {
+                    return <p className="text-gray-400">No hay imágenes para mostrar.</p>;
+                }
                 return (
                     <div className="relative h-full w-full flex flex-col items-center justify-center">
                         <img
@@ -85,10 +88,12 @@ export default function Services() {
                             alt={`Storyboard Frame ${currentFrame + 1}`}
                             className="w-full h-full object-contain rounded-lg shadow-2xl"
                         />
-                        <div className="absolute inset-0 flex justify-between items-center px-4">
-                            <button onClick={prevFrame} className="p-3 bg-black/50 hover:bg-black/70 rounded-full text-white transition z-20" aria-label="Anterior frame">&lsaquo;</button>
-                            <button onClick={nextFrame} className="p-3 bg-black/50 hover:bg-black/70 rounded-full text-white transition z-20" aria-label="Siguiente frame">&rsaquo;</button>
-                        </div>
+                        {activeService.content.length > 1 && (
+                            <div className="absolute inset-0 flex justify-between items-center px-4">
+                                <button onClick={prevFrame} className="p-3 bg-black/50 hover:bg-black/70 rounded-full text-white transition z-20" aria-label="Anterior frame">&lsaquo;</button>
+                                <button onClick={nextFrame} className="p-3 bg-black/50 hover:bg-black/70 rounded-full text-white transition z-20" aria-label="Siguiente frame">&rsaquo;</button>
+                            </div>
+                        )}
                     </div>
                 );
             case 'video':
@@ -159,9 +164,10 @@ export default function Services() {
                         {renderDynamicContent()}
                     </div>
 
-                    {activeService && activeService.type === 'images' && (
+                    {activeService && activeService.type === 'images' && activeService.content.length > 0 && (
                         <div className="text-center mt-3 text-gray-500">
-                            Frame {currentFrame + 1} de {activeService.content.length}. Haz clic en las flechas para pasar los frames.
+                            Frame {currentFrame + 1} de {activeService.content.length}.
+                            {activeService.content.length > 1 && " Haz clic en las flechas para pasar los frames."}
                         </div>
                     )}
                 </div>
