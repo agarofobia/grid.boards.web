@@ -3,7 +3,7 @@
 // === IMPORTACIONES ESENCIALES DE REACT ===
 import React, { useState, useRef, useEffect } from 'react';
 
-// === DATOS DE LOS SERVICIOS ===
+// === DATOS DE LOS SERVICIOS (CON RUTAS CORREGIDAS) ===
 const servicesData = [
     {
         id: 'storyboard',
@@ -22,7 +22,7 @@ const servicesData = [
         title: "Boardomatic",
         intro: "A boardomatic takes the storyboard into sequence with voice-over, dialogue, music and sound effects.",
         type: 'video',
-        content: '/assets/boardomatic.mp4', 
+        content: '/assets/Airpods Spec Boardomatic.mp4', // <--- RUTA CORREGIDA
         description: "It allows agencies and clients to experience the script in real time, validating its duration, rhythm and the tone of the commercial.",
     },
     {
@@ -30,7 +30,7 @@ const servicesData = [
         title: "Animatic",
         intro: "An animatic builds on the boardomatic by adding internal movement to each shot.",
         type: 'video',
-        content: '/assets/animatic.mp4', 
+        content: '/assets/Airpods Spec Animatic.mp4', // <--- RUTA CORREGIDA
         description: "Characters and scenes gain motion, timing becomes precise and the spot takes shape as the closest version to the final execution before production.",
     },
 ];
@@ -47,7 +47,7 @@ export default function Services() {
         if (videoRef.current) {
             videoRef.current.pause();
         }
-        setCurrentFrame(0); 
+        setCurrentFrame(0);
     }, [activeTab]);
 
     const handleTabChange = (serviceId) => {
@@ -63,10 +63,10 @@ export default function Services() {
             setCurrentFrame((prev) => (prev + 1) % activeService.content.length);
         }
     };
-    
+
     const prevFrame = () => {
         if (activeService && activeService.type === 'images') {
-            setCurrentFrame((prev) => 
+            setCurrentFrame((prev) =>
                 (prev - 1 + activeService.content.length) % activeService.content.length
             );
         }
@@ -80,10 +80,10 @@ export default function Services() {
             case 'images':
                 return (
                     <div className="relative h-full w-full flex flex-col items-center justify-center">
-                        <img 
-                            src={activeService.content[currentFrame]} 
+                        <img
+                            src={activeService.content[currentFrame]}
                             alt={`Storyboard Frame ${currentFrame + 1}`}
-                            className="w-full h-full object-contain rounded-lg shadow-2xl" 
+                            className="w-full h-full object-contain rounded-lg shadow-2xl"
                         />
                         <div className="absolute inset-0 flex justify-between items-center px-4">
                             <button onClick={prevFrame} className="p-3 bg-black/50 hover:bg-black/70 rounded-full text-white transition z-20" aria-label="Anterior frame">&lsaquo;</button>
@@ -93,12 +93,12 @@ export default function Services() {
                 );
             case 'video':
                 return (
-                    <video 
+                    <video
                         key={activeService.id}
                         ref={videoRef}
                         src={activeService.content}
                         controls
-                        className="w-full h-auto rounded-xl" 
+                        className="w-full h-auto rounded-xl"
                         onPause={() => console.log(`${activeService.title} pausado.`)}
                     >
                         Tu navegador no soporta el video {activeService.title}.
@@ -112,8 +112,8 @@ export default function Services() {
 
     // === RENDERIZADO PRINCIPAL (Estilo Navbar Aplicado) ===
     return (
-        <section id="services" className="py-12 px-0 text-gray-100"> 
-            
+        <section id="services" className="py-12 px-0 text-gray-100">
+
             {/* ENCABEZADO: Fuera del marco */}
             <div className="text-center max-w-3xl mx-auto px-6 mb-12 pb-6">
                 <h2 className="text-2xl font-bold text-white mb-2">What we deliver</h2>
@@ -124,8 +124,8 @@ export default function Services() {
 
             {/* CONTENEDOR EXTERIOR (EL MARCO) */}
             {/* ESTILO NAVBAR: Fondo semitransparente (bg-black/70) y borde suave (border-gray-800) */}
-            <div className="mx-auto max-w-5xl px-6 py-4 bg-black/70 border border-gray-800 rounded-xl shadow-xl"> 
-                
+            <div className="mx-auto max-w-5xl px-6 py-4 bg-black/70 border border-gray-800 rounded-xl shadow-xl">
+
                 {/* 1. Botones de Navegación (Centrado) */}
                 <div className="flex justify-center space-x-4 border-b border-gray-700 pb-3 mb-3 overflow-x-auto">
                     {servicesData.map((service) => (
@@ -134,10 +134,10 @@ export default function Services() {
                             onClick={() => handleTabChange(service.id)}
                             className={`
                                 py-2 px-6 rounded-full font-semibold text-lg transition duration-300 flex-shrink-0
-                                border border-white 
-                                ${activeTab === service.id 
-                                    ? 'bg-brand-yellow text-black border-brand-yellow shadow-lg' 
-                                    : 'bg-transparent text-white hover:border-gray-400' 
+                                border border-white
+                                ${activeTab === service.id
+                                    ? 'bg-brand-yellow text-black border-brand-yellow shadow-lg'
+                                    : 'bg-transparent text-white hover:border-gray-400'
                                 }
                             `}
                         >
@@ -145,7 +145,7 @@ export default function Services() {
                         </button>
                     ))}
                 </div>
-                
+
                 {/* 2. Bloque de Descripción Dinámica (Flotante y Centrado) */}
                 <div className="text-center p-2 mb-4 max-w-3xl mx-auto">
                     <p className="text-gray-400 text-base">
@@ -158,7 +158,7 @@ export default function Services() {
                     <div className="border border-gray-700 p-2 rounded-xl min-h-[300px] flex items-center justify-center">
                         {renderDynamicContent()}
                     </div>
-                    
+
                     {activeService && activeService.type === 'images' && (
                         <div className="text-center mt-3 text-gray-500">
                             Frame {currentFrame + 1} de {activeService.content.length}. Haz clic en las flechas para pasar los frames.
