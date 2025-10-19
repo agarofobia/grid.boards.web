@@ -129,7 +129,8 @@ export default function Services() {
 
             {/* CONTENEDOR EXTERIOR (EL MARCO) */}
             {/* ESTILO NAVBAR: Fondo semitransparente (bg-black/70) y borde suave (border-gray-800) */}
-            <div className="mx-auto max-w-5xl px-6 py-4 bg-black/70 border border-gray-800 rounded-xl shadow-xl">
+            {/* CAMBIO CLAVE: max-w-5xl cambiado a max-w-4xl para un mejor ajuste */}
+            <div className="mx-auto max-w-4xl px-6 py-4 bg-black/70 border border-gray-800 rounded-xl shadow-xl">
 
                 {/* 1. Botones de Navegación (Centrado) */}
                 <div className="flex justify-center space-x-4 border-b border-gray-700 pb-3 mb-3 overflow-x-auto">
