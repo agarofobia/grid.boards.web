@@ -1,21 +1,17 @@
-// src/components/About.jsx - ¡Fondo de video/imagen eliminado!
+// src/components/About.jsx - ¡Ajuste de espaciado vertical!
 
 import React from 'react'
 
 export default function About() {
   return (
-    // Sección normal con padding, sin fondos propios
-    // Heredará el fondo oscuro de App.jsx
-    // CAMBIO 1: Revertido a 'py-12' para el padding vertical original
-    <section id="about" className="py-12 px-6 md:px-20 text-gray-200">
+    // CAMBIO CLAVE: Aumentamos padding superior (pt-24) y quitamos el inferior (pb-0)
+    <section id="about" className="pt-24 pb-0 px-6 md:px-20 text-gray-200">
       
       {/* Fondo con video/imagen ELIMINADOS */}
 
       {/* Contenido */}
-      {/* Se quitó la clase 'relative' que ya no es necesaria */}
-      {/* CAMBIO 2: 'max-w-4xl' cambiado a 'max-w-3xl' para un texto más angosto y centrado */}
       <div className="max-w-3xl mx-auto text-center">
-        {/* CAMBIO 3: Título más grande (de 4xl/5xl a 5xl/6xl) */}
+        
         <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
           About GridBoards
         </h2>
