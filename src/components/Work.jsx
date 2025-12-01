@@ -120,9 +120,10 @@ export default function Work() {
                     </p>
                 </div>
 
-                {/* Grid de Portafolio (3x2) */}
+                {/* Grid de Portafolio (Cambiado a solo 3 elementos) */}
+                {/* La clase de la cuadrícula (lg:grid-cols-3) funciona perfecto para 3 elementos */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projectsData.map((project, index) => (
+                    {projectsData.slice(0, 3).map((project, index) => (
                         <WorkCard 
                             key={index} 
                             type={project.type} 
