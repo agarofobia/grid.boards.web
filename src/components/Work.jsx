@@ -1,6 +1,6 @@
-// src/components/Work.jsx - ¡Versión Final con Bug de Scroll Corregido!
+// src/components/Work.jsx - Componente de la sección de Portafolio (Grid).
 
-import React, { useState, useEffect } from 'react'; // Aseguramos que useEffect esté importado
+import React, { useState, useEffect } from 'react'; 
 
 // === DATA DE LOS PROYECTOS ===
 const projectsData = [
@@ -12,9 +12,9 @@ const projectsData = [
     { type: "Pilot", brand: "Series C", media: { type: 'video', url: '/assets/work/pilot_series_c.mp4' } },
 ];
 
-// Componente para el VISOR DE MEDIOS dentro del Modal (se mantiene igual)
+// Componente para el VISOR DE MEDIOS dentro del Modal.
 const ModalViewer = ({ media }) => {
-    // ... (Código de ModalViewer se mantiene igual)
+    // Renderiza un reproductor de video si el tipo es 'video'.
     if (media.type === 'video') {
         return (
             <video 
@@ -27,6 +27,7 @@ const ModalViewer = ({ media }) => {
             </video>
         );
     }
+    // Renderiza una imagen si el tipo es 'image'.
     return (
         <img 
             src={media.url} 
@@ -36,8 +37,9 @@ const ModalViewer = ({ media }) => {
     );
 };
 
-// Componente para la Tarjeta de Proyecto (se mantiene igual)
+// Componente para la Tarjeta de Proyecto en la grilla.
 const WorkCard = ({ type, brand, onClick }) => (
+    // Botón con estilos visuales y la función onClick para abrir el modal.
     <button 
         onClick={onClick}
         className="w-full h-full bg-black/60 rounded-xl overflow-hidden aspect-[16/9] flex items-end justify-start p-4 border border-gray-800 hover:border-brand-yellow transition duration-300 transform hover:scale-[1.02] text-left"
@@ -52,28 +54,30 @@ const WorkCard = ({ type, brand, onClick }) => (
 );
 
 
-// === MODAL PRINCIPAL (EL LIGHTBOX) ===
+// === MODAL PRINCIPAL (LIGHTBOX) ===
 const ProjectModal = ({ project, onClose }) => {
     if (!project) return null;
     
-    // CORRECCIÓN CLAVE: Usar useEffect para aplicar y quitar el overflow
+    // Hook para controlar el desbordamiento del body: oculta el scroll al abrir y lo restaura al cerrar.
     useEffect(() => {
         document.body.style.overflow = 'hidden';
         return () => {
-            // Se asegura de que se ejecute la restauración al desmontar (cerrar)
+            // Función de limpieza para asegurar la restauración del scroll al desmontar.
             document.body.style.overflow = 'auto'; 
         };
-    }, [project]); // Se ejecuta cuando el 'project' cambia (abre o cierra)
+    }, [project]); // Dependencia en 'project' para ejecutar al abrir/cerrar.
 
     return (
+        // Overlay fijo (fixed inset-0) que maneja el cierre al hacer clic fuera del contenido.
         <div 
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
             onClick={onClose} 
         >
             <div 
                 className="relative"
-                onClick={(e) => e.stopPropagation()} 
+                onClick={(e) => e.stopPropagation()} // Detiene la propagación para que el clic no cierre el modal.
             >
+                {/* Botón de cierre (X) posicionado arriba a la derecha. */}
                 <button
                     onClick={onClose}
                     className="absolute -top-10 right-0 text-white text-3xl font-light opacity-80 hover:opacity-100 transition"
@@ -82,6 +86,7 @@ const ProjectModal = ({ project, onClose }) => {
                     &times; 
                 </button>
                 
+                {/* Contenido multimedia dinámico. */}
                 <ModalViewer media={project.media} />
                 
                 <div className="text-center mt-3 text-gray-400">
@@ -94,12 +99,11 @@ const ProjectModal = ({ project, onClose }) => {
 
 
 export default function Work() {
-    // Estado para controlar qué proyecto está activo en el modal
+    // Estado para gestionar el proyecto seleccionado para mostrar en el modal.
     const [activeProject, setActiveProject] = useState(null);
 
-    // Ajuste para el estado inicial de scroll (soluciona el bug de desarrollo)
+    // Efecto para asegurar que el scroll del body esté activo al cargar si el modal está cerrado.
     useEffect(() => {
-        // Asegura que el scroll esté activo al cargar la página por primera vez
         if (!activeProject) {
             document.body.style.overflow = 'auto';
         }
@@ -110,7 +114,7 @@ export default function Work() {
             
             <div className="max-w-7xl mx-auto"> 
                 
-                {/* Encabezado */}
+                {/* Encabezado de la sección. */}
                 <div className="text-center mb-12">
                     <h2 className="text-3xl font-extrabold text-white mb-2">
                         Our work shows the cinematic craft behind every frame
@@ -120,8 +124,7 @@ export default function Work() {
                     </p>
                 </div>
 
-                {/* Grid de Portafolio (Cambiado a solo 3 elementos) */}
-                {/* La clase de la cuadrícula (lg:grid-cols-3) funciona perfecto para 3 elementos */}
+                {/* Grid de Portafolio. Muestra solo los 3 primeros proyectos usando slice(0, 3). */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projectsData.slice(0, 3).map((project, index) => (
                         <WorkCard 
@@ -134,10 +137,10 @@ export default function Work() {
                 </div>
             </div>
 
-            {/* MODAL / LIGHTBOX */}
+            {/* Componente Modal que se renderiza solo si 'activeProject' tiene un valor. */}
             <ProjectModal 
                 project={activeProject}
-                onClose={() => setActiveProject(null)} 
+                onClose={() => setActiveProject(null)} // Función para cerrar el modal.
             />
 
         </section>

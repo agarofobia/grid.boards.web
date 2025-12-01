@@ -1,17 +1,14 @@
-// src/components/Hero.jsx - Con ajuste pt-20
+// src/components/Hero.jsx - Componente de la sección principal (Hero/Header).
 
 import React from 'react'
 
 export default function Hero() {
   return (
-    // CAMBIO CLAVE: Añadimos pt-20 aquí para evitar que el Navbar lo tape.
+    // Contenedor principal (header). Se extiende a min-h-screen y usa pt-20 para desplazar el contenido
+    // bajo el Navbar fijo. Posicionamiento relativo para contener el video de fondo.
     <header className="relative min-h-screen pt-20 flex items-center justify-center text-center bg-black overflow-hidden">
       
-      {/* RUTA DE TU SISTEMA OPERATIVO (Solo para referencia):
-          "C:\Users\HP\Desktop\artu\gridboards-vite\public\assets\hero-video.mp4" 
-      */}
-      
-      {/* 1. Video de Fondo (Usando la RUTA WEB que funciona con Vite) */}
+      {/* Elemento de video: Se posiciona absolutamente para servir como fondo. */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
         autoPlay
@@ -20,17 +17,17 @@ export default function Hero() {
         playsInline
         src="/assets/hero-video.mp4" 
       >
-        {/* Usamos la misma ruta para compatibilidad */}
+        {/* Etiqueta source para compatibilidad con diferentes navegadores. */}
         <source src="/assets/hero-video.mp4" type="video/mp4" /> 
         
-        {/* Fallback */}
+        {/* Mensaje de fallback si el navegador no soporta el formato. */}
         Tu navegador no soporta videos HTML5.
       </video>
       
-      {/* 2. Overlay Oscuro */}
+      {/* Capa de superposición (overlay) oscura con 70% de opacidad para mejorar la legibilidad del texto. */}
       <div className="absolute inset-0 bg-black/70"></div> 
       
-      {/* 3. Contenido Principal */}
+      {/* Contenido principal de la sección, centrado y con z-index superior al video/overlay. */}
       <div className="container mx-auto px-6 relative z-10"> 
         
         <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">

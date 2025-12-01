@@ -1,13 +1,13 @@
-// src/components/Footer.jsx - ¡Versión Final Profesional!
+// src/components/Footer.jsx - Componente de la sección de pie de página.
 
 import React from 'react';
 
 export default function Footer() {
     return (
-        // Fondo negro total y padding vertical
+        // Contenedor principal del footer con fondo negro y espaciado vertical.
         <footer className="bg-black py-8 px-6 md:px-20 text-gray-400 text-sm">
             
-            {/* Contenedor principal: Distribuye el contenido a los extremos */}
+            {/* Contenedor interno: Distribuye el contenido a los extremos (flexbox). */}
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
                 
                 {/* Créditos y Copyright (Lado Izquierdo) */}
